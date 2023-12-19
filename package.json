@@ -1,0 +1,13 @@
+{
+  "name": "jobbuddy",
+  "version": "1.0.0",
+  "description": "[Jobify](https://jobify.live/)",
+  "main": "index.js",
+  "scripts": {
+      "setup-project": "npm i && cd client && npm i",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
