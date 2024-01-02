@@ -1,7 +1,8 @@
 import { StatusCodes } from 'http-status-codes';
 import UserModel from '../models/UserModel.js';
-import { hashPassword } from '../utils/passwordUtils.js';
+import { hashPassword, comparePassword } from '../utils/passwordUtils.js';
 import { UnauthenticatedError } from '../errors/customErrors.js';
+import { createJWT } from '../utils/tokenUtils.js';
 
 export const register = async (req, res) => {
   // first registered user is an admin
@@ -19,9 +20,15 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   // check if user exists
   // check if password is correct
-
   const user = await UserModel.findOne({ email: req.body.email });
-  if (!user) throw new UnauthenticatedError('invalid credentials');
+  const token = createJWT({ userId: user._id, role: user.role });
+
+  console.log(token);
+  const isValidUser = user && (await comparePassword(password, user.password));
+
+  if (!isValidUser) throw new UnauthenticatedError('invalid credentials');
+
 
   res.send('login route');
 };
+
