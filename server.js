@@ -8,7 +8,6 @@ import mongoose from 'mongoose';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import authRouter from './routers/authRouter.js';
 
-
 const app = express();
 
 if (process.env.NODE_ENV === 'development') {

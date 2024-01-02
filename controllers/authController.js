@@ -8,7 +8,7 @@ export const register = async (req, res) => {
   const isFirstAccount = (await UserModel.countDocuments()) === 0;
   req.body.role = isFirstAccount ? 'admin' : 'user';
 
-  const hashedPassword = await hashPassword(req.body.password)
+  const hashedPassword = await hashPassword(req.body.password);
   req.body.password = hashedPassword;
 
   const user = await UserModel.create(req.body);
@@ -17,11 +17,11 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    // check if user exists
-    // check if password is correct
-  
-    const user = await UserModel.findOne({ email: req.body.email });
-    if (!user) throw new UnauthenticatedError('invalid credentials');
-  
-    res.send('login route');
-  };
+  // check if user exists
+  // check if password is correct
+
+  const user = await UserModel.findOne({ email: req.body.email });
+  if (!user) throw new UnauthenticatedError('invalid credentials');
+
+  res.send('login route');
+};
