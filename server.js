@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import jobRouter from './routers/jobRouter.js';
 import mongoose from 'mongoose';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
+import authRouter from './routers/authRouter.js';
 
 
 const app = express();
@@ -18,6 +19,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('hello world');
 });
+
+app.use('/auth', authRouter);
 
 app.use('/jobs', jobRouter);
 

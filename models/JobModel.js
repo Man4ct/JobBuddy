@@ -3,8 +3,14 @@ import mongoose from 'mongoose';
 import { JOB_STATUS, JOB_TYPE } from '../utils/constants.js';
 const JobSchema = new mongoose.Schema(
   {
-    company: String,
-    position: String,
+    company: {
+        type: String,
+        default: '',
+      },
+    position: {
+        type: String,
+        default: '',
+      },
     jobStatus: {
       type: String,
       enum: Object.values(JOB_STATUS),
