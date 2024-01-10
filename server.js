@@ -9,6 +9,7 @@ import errorHandlerMiddleware from './middleware/errorHandlerMiddleware.js';
 import authRouter from './routers/authRouter.js';
 import {authenticateUser} from './middleware/authMiddleware.js';
 import cookieParser from 'cookie-parser';
+import userRouter from './routers/userRouter.js';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 app.use('/auth', authRouter);
 
 app.use('/jobs', authenticateUser, jobRouter);
+app.use('/users', authenticateUser, userRouter);
 
 app.use(errorHandlerMiddleware);
 
