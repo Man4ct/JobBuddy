@@ -22,6 +22,9 @@ import { loader as allJobLoader } from './pages/AllJobs';
 import { loader as editJobLoader } from './pages/EditJob';
 import { action as editJobAction } from './pages/EditJob';
 import { action as deleteJobAction } from './pages/DeleteJob';
+import { action as profileAction } from './pages/Profile';
+import { loader as statLoader } from './pages/Stats';
+
 import { adminLoader } from './pages/Admin';
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
@@ -62,6 +65,7 @@ const router = createBrowserRouter([
           {
             path: 'stats',
             element: <Stats />,
+            loader: statLoader
           },
           {
             path: 'all-jobs',
@@ -71,6 +75,7 @@ const router = createBrowserRouter([
           {
             path: 'profile',
             element: <Profile />,
+            action: profileAction
           },
           {
             path: 'edit-job/:id',

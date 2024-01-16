@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useDashboardContext } from '../pages/DashboardLayout';
 
 const LogoutContainer = () => {
-  const [ showLogout, setShowLogout ] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
   const { user, logoutUser } = useDashboardContext();
   return (
     <Wrapper>
@@ -13,7 +13,11 @@ const LogoutContainer = () => {
         className='btn logout-btn'
         onClick={() => setShowLogout(!showLogout)}
       >
-        <FaUserCircle />
+        {user.avatar ? (
+          <img src={user.avatar} alt='avatar' className='img' />
+        ) : (
+          <FaUserCircle />
+        )}
         {user?.name}
         <FaCaretDown />
       </button>
