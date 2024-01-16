@@ -1,23 +1,31 @@
 import { readFile } from 'fs/promises';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import moment from 'moment';
 dotenv.config();
 
 import Job from './models/JobModel.js';
 import User from './models/UserModel.js';
 try {
+
+  const startDate = moment('2023-01-01');
+  const endDate = moment('2023-12-31');
+  
+  
   await mongoose.connect(process.env.MONGO_URL);
   // const user = await User.findOne({ email: 'john@gmail.com' });
-  const user = await User.findOne({ email: 'test@test.com' });
+  const jobs = await Job.find()
 
-  const jsonJobs = JSON.parse(
-    await readFile(new URL('./utils/mockData.json', import.meta.url))
-  );
-  const jobs = jsonJobs.map((job) => {
-    return { ...job, createdBy: user._id };
-  });
-  await Job.deleteMany({ createdBy: user._id });
-  await Job.create(jobs);
+  for (const job of jobs) {
+    const randomDate = moment(startDate + Math.random() * (endDate - startDate));
+    await Job.findByIdAndUpdate(job._id, {
+      $set: {
+        createdAt: randomDate
+      }
+    })
+  }
+
+
   console.log('Success!!!');
   process.exit(0);
 } catch (error) {
