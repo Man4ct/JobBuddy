@@ -7,7 +7,8 @@
   "scripts": {
     "setup-project": "npm i && cd client && npm i",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "setup-production-app": "npm i && cd client && npm i && npm run build"
   },
   "keywords": [],
   "author": "",
