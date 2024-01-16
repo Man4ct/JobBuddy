@@ -1,6 +1,6 @@
 import { Outlet,redirect, useLoaderData, useNavigate } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/Dashboard';
-import { BigSidebar, Navbar, SmallSidebar } from '../components';
+import { BigSidebar, Navbar, SmallSideBar } from '../components';
 import { createContext, useContext, useState } from 'react';
 import { checkDefaultTheme } from '../App';
 import customFetch from '../utils/customFetch.js';
@@ -54,7 +54,7 @@ const DashboardLayout = (isDarkThemeEnabled) => {
     >
       <Wrapper>
         <main className='dashboard'>
-          <SmallSidebar />
+          <SmallSideBar />
           <BigSidebar />
           <div>
             <Navbar />
