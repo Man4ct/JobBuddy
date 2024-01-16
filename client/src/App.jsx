@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import {
   HomeLayout,
   Landing,
@@ -11,67 +11,70 @@ import {
   AllJobs,
   Profile,
   Admin,
-} from "./pages";
+  EditJob,
+} from './pages';
 
-import { action as addJobAction } from "./pages/AddJob";
-import { action as registerAction } from "./pages/Register";
-import { action as loginAction } from "./pages/Login";
-import { loader as dashboardLoader } from "./pages/DashboardLayout";
-import { loader as allJobLoader } from "./pages/AllJobs";
+import { action as addJobAction } from './pages/AddJob';
+import { action as registerAction } from './pages/Register';
+import { action as loginAction } from './pages/Login';
+import { loader as dashboardLoader } from './pages/DashboardLayout';
+import { loader as allJobLoader } from './pages/AllJobs';
 import { loader as editJobLoader } from './pages/EditJob';
 import { action as editJobAction } from './pages/EditJob';
+import { action as deleteJobAction } from './pages/DeleteJob';
+import { adminLoader } from './pages/Admin';
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
-  document.body.classList.toggle('dark-theme', isDarkTheme)
-  return isDarkTheme
-}
+  document.body.classList.toggle('dark-theme', isDarkTheme);
+  return isDarkTheme;
+};
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <HomeLayout />,
-    errorElement: <Error/>,
+    errorElement: <Error />,
     children: [
       {
         index: true,
         element: <Landing />,
       },
       {
-        path: "register",
+        path: 'register',
         element: <Register />,
-        action: registerAction
+        action: registerAction,
       },
       {
-        path: "login",
+        path: 'login',
         element: <Login />,
-        action: loginAction
+        action: loginAction,
       },
       {
-        path: "dashboard",
+        path: 'dashboard',
         element: <DashboardLayout />,
         loader: dashboardLoader,
         children: [
           {
             index: true,
-            element: <AddJob/>,
-            action: addJobAction
+            element: <AddJob />,
+            action: addJobAction,
           },
           {
             path: 'stats',
-            element: <Stats/>
+            element: <Stats />,
           },
           {
             path: 'all-jobs',
-            element: <AllJobs/>,
-            loader: allJobLoader
+            element: <AllJobs />,
+            loader: allJobLoader,
           },
           {
             path: 'profile',
-            element: <Profile/>
+            element: <Profile />,
           },
           {
             path: 'admin',
-            element: <Admin/>
+            element: <Admin />,
           },
           {
             path: 'edit-job/:id',
@@ -79,12 +82,18 @@ const router = createBrowserRouter([
             loader: editJobLoader,
             action: editJobAction,
           },
-        ]
+          { path: 'delete-job/:id', action: deleteJobAction },
+          {
+            path: 'admin',
+            element: <Admin />,
+            loader: adminLoader,
+          },
+        ],
       },
     ],
   },
   {
-    path: "/error",
+    path: '/error',
     element: <Error />,
   },
 ]);
