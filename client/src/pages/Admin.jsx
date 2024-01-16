@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 export const adminLoader = async () => {
   try {
     const response = await customFetch.get('/users/admin/app-stats');
-    console.log(response);
     return response.data;
   } catch (error) {
     toast.error('You are not authorized to view this page');
@@ -21,19 +20,18 @@ import { StatItem } from '../components';
 
 const Admin = () => {
   const { users, jobs } = useLoaderData();
-  console.log(users)
   return (
     <Wrapper>
       <StatItem
         title='current users'
-        // count={users}
+        count={users}
         color='#e9b949'
         bcg='#fcefc7'
         icon={<FaSuitcaseRolling />}
       />
       <StatItem
         title='total jobs'
-        // count={jobs}
+        count={jobs}
         color='#647acb'
         bcg='#e0e8f9'
         icon={<FaCalendarCheck />}

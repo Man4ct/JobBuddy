@@ -11,7 +11,6 @@ export const getCurrentUser = async (req, res) => {
 export const getApplicationStats = async (req, res) => {
     const users = await UserModel.countDocuments();
     const jobs = await JobModel.countDocuments();
-    console.log('njing')
     res.status(StatusCodes.OK).json({ users, jobs });
   };
 
